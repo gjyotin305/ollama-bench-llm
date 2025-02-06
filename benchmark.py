@@ -90,35 +90,3 @@ def run_response(
     )
 
     return response_object
-
-# if __name__ == "__main__":
-#     model_name = [
-#         "prometeo_iter4",
-#         "phi3:14b",
-#         "qwen2.5:7b-instruct-q6_K",
-#         "qwen2.5:7b-instruct-q8_0",
-#         "qwen2.5:1.5b-instruct-q6_K"
-#     ]
-
-#     test_prompts = [
-#         "Why is the sky blue?",
-#         "How do airplanes stay in the air?",
-#         "What causes earthquakes?",
-#         "Why do we dream?",
-#         "How does the internet work?",
-#         "What is the theory of relativity?",
-#         "Why do leaves change color in the fall?",
-#         "How does a refrigerator keep food cold?",
-#         "What causes tides in the ocean?",
-#         "Why do cats purr?",
-#         "How does photosynthesis work?",
-#         "What is artificial intelligence?",
-#         "Why do humans need sleep?",
-#         "How does a vaccine work?",
-#         "What is the difference between a comet and an asteroid?"
-#     ]   
-
-#     run_tests(
-#         model_names=model_name,
-#         test_prompts=test_prompts
-#     )
