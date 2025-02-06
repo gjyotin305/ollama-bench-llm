@@ -1,7 +1,7 @@
 import pyfiglet
 from termcolor import colored
 from ollama import Client
-from benchmark import run_tests
+from bench.benchmark import run_tests
 import argparse
 import sys
 import logging
