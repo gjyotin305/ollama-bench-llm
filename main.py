@@ -31,9 +31,23 @@ def main():
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
     
-    parser.add_argument("--model_name", type=str, help="Name of the model to benchmark")
-    parser.add_argument("--base_url", type=str, help="Base URL of the Ollama server")
-    parser.add_argument("--test_query", type=str, help="Test query to evaluate the model")
+    parser.add_argument(
+        "--model_name", type=str, help="Name of the model to benchmark"
+    )
+    parser.add_argument(
+        "--base_url", type=str, help="Base URL of the Ollama server"
+    )
+    parser.add_argument(
+        "--test_query", 
+        type=str, 
+        help="Test query to evaluate the model", 
+        required=False
+    )
+    parser.add_argument(
+        "--test_file",
+        type=str,
+        help=".txt file with queries"
+    )
 
     args = parser.parse_args()
     
@@ -42,11 +56,28 @@ def main():
     try:
         client = Client(host=args.base_url)
         logging.info(f"Running benchmark for model: {args.model_name}")
-        results = run_tests(
-            model_names=[args.model_name], 
-            test_prompts=[args.test_query],
-            client=client
-        )
+        if args.test_query:
+            results = run_tests(
+                model_names=[args.model_name], 
+                test_prompts=[args.test_query],
+                client=client
+            )
+        elif args.test_file and args.test_query is None:
+            tests = []
+            with open(f"{args.test_file}", "r") as f:
+                for line in f:
+                    question = line.strip()
+                    if question:
+                        tests.append(question.split(',')[0])
+                f.close()
+
+            logging.info(f"Queries found are {len(tests)}")
+            results = run_tests(
+                model_names=[args.model_name],
+                test_prompts=tests,
+                client=client
+            )
+
         logging.info(f"RESULTS ARE {results}")
         
     except Exception as e:

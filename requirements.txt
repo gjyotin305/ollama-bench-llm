@@ -1,0 +1,4 @@
+ollama==0.4.7
+tqdm==4.67.1
+pyfiglet==1.0.2
+termcolor==2.5.0
